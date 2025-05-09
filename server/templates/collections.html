@@ -1,0 +1,33 @@
+<div class="accordion" id="collections-accordion">
+    {% for collection in collections %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-collection-name="{{ collection.name }}"
+                    data-bs-toggle="collapse" data-bs-target="#collections-accordion-{{ loop.index }}"
+                    aria-expanded="false" aria-controls="collections-accordion-{{ loop.index }}">
+                {{ collection.name }}
+            </button>
+        </h2>
+        <div id="collections-accordion-{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#collections-accordion">
+            <div class="accordion-body">
+                <div class="btn-group d-flex inherit-rounded rounded-top">
+                    <a href="#{{ collection.collection }}" class="collection-new-request btn btn-primary inherit-rounded">New request</a>
+                </div>
+                <div class="list-group inherit-rounded">
+                {% for request in collection.requests %}
+                    <a href="#{{ collection.collection }}" class="collection-request list-group-item list-group-item-action">{{ request.name }}</a>
+                {% endfor %}
+                {% if collection.requests|length < 1 %}
+                    <span class="list-group-item list-group-item-light">No requests yet</span>
+                {% endif %}
+                </div>
+                <div class="btn-group d-flex inherit-rounded rounded-bottom">
+                    <a href="#{{ collection.collection }}" class="collection-settings btn btn-primary inherit-rounded">Edit</a>
+                    <a href="#{{ collection.collection }}" class="collection-run btn btn-secondary inherit-rounded{% if collection.requests|length < 1 %} disabled{% endif %}">Run</a>
+                    <a href="#{{ collection.collection }}" class="collection-remove btn btn-danger inherit-rounded" title="Delete">&#128465;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

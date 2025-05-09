@@ -1,0 +1,29 @@
+.inherit-rounded {
+    border-radius: inherit;
+}
+
+.border-transparent {
+    border-color: transparent !important;
+}
+
+#tabs .btn-close {
+    top: -0.2em;
+    left: 0.2em;
+    width: 0.4em;
+    height: 0.4em;
+    position: relative;
+}
+
+header .icon {
+    top: -0.3em;
+    position: relative;
+}
+
+.collection-form-variables-row-prototype,
+.request-form-headers-row-prototype {
+    display: none;
+}
+
+.input-group-add-remove button {
+    width: 5ex;
+}

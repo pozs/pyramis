@@ -1,0 +1,33 @@
+<div class="request-run">
+    <div class="input-group mb-1">
+        <span class="input-group-text bg-primary">&lt;</span>
+        <input type="text" class="form-control request-method" value="{% if request_method %}{{ request_method|e }}{% endif %}" readonly style="max-width: 104px;">
+        <span class="input-group-text">@</span>
+        <input type="text" class="form-control request-url" value="{% if request_url %}{{ request_url|e }}{% endif %}" readonly>
+    </div>
+    <div class="input-group mb-1">
+        <span class="input-group-text bg-primary">&lt;</span>
+        <textarea class="form-control request-headers" readonly style="min-height: 8em;">{% if request_headers %}{{ request_headers|e }}{% endif %}</textarea>
+    </div>
+    <div class="input-group mb-1">
+        <span class="input-group-text bg-primary">&lt;</span>
+        <textarea class="form-control request-payload" readonly style="min-height: 16em;">{% if request_payload %}{{ request_payload|e }}{% endif %}</textarea>
+    </div>
+{% if response_status < 400 %}
+{% set bg = "bg-success" %}
+{% else %}
+{% set bg = "bg-danger" %}
+{% endif %}
+    <div class="input-group mb-1">
+        <span class="input-group-text {{ bg }}">&gt;</span>
+        <input type="text" class="form-control response-status" value="{{ response_status }}" readonly>
+    </div>
+    <div class="input-group mb-1">
+        <span class="input-group-text {{ bg }}">&gt;</span>
+        <textarea class="form-control response-headers" readonly style="min-height: 8em;">{% if response_headers %}{{ response_headers|e }}{% endif %}</textarea>
+    </div>
+    <div class="input-group mb-1">
+        <span class="input-group-text {{ bg }}">&gt;</span>
+        <textarea class="form-control response-payload" readonly style="min-height: 16em;">{% if response_payload %}{{ response_payload|e }}{% endif %}</textarea>
+    </div>
+</div>

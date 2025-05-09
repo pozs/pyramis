@@ -1,0 +1,70 @@
+<form class="request-form">
+    <input type="hidden" class="request-form-collection" value="{{ collection }}">
+    <div class="input-group mt-3">
+        <input type="text" class="form-control request-form-name" placeholder="Name" required {% if request %} readonly value="{{ request }}{% endif %}">
+        <button class="btn btn-primary request-form-save" type="submit">Save</button>
+        <button class="btn btn-secondary request-form-run" type="button"{% if not request %} disabled{% endif %}>Run</button>
+    </div>
+    <div class="input-group mt-3">
+        <input type="text" class="form-control request-form-method" placeholder="Method"
+               list="request-form-method-options" style="max-width: 104px;" required value="{{ method }}">
+        <span class="input-group-text">@</span>
+        <input type="text" class="form-control request-form-url" placeholder="URL" required value="{{ url }}">
+    </div>
+    <datalist id="request-form-method-options">
+        <option value="HEAD">
+        <option value="GET">
+        <option value="POST">
+        <option value="PUT">
+        <option value="DELETE">
+        <option value="PATCH">
+    </datalist>
+{% for header in headers %}
+    <div class="input-group mt-3 input-group-add-remove request-form-headers-row">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0 request-form-headers-enabled" type="checkbox" aria-label="Enabled"{% if header.enabled %} checked{% endif %}>
+        </div>
+        <input type="text" class="form-control request-form-headers-name" placeholder="Header"
+               list="request-form-headers-name-options" style="max-width: 250px;" value="{{ header.name }}">
+        <span class="input-group-text">:</span>
+        <input type="text" class="form-control request-form-headers-value" placeholder="Value" value="{{ header.value }}">
+        <button class="btn btn-danger request-form-headers-remove" type="button">-</button>
+    </div>
+{% endfor %}
+    <div class="input-group mt-3 input-group-add-remove request-form-headers-row request-form-headers-row-prototype">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0 request-form-headers-enabled" type="checkbox" aria-label="Enabled">
+        </div>
+        <input type="text" class="form-control request-form-headers-name" placeholder="Header"
+               list="request-form-headers-name-options" style="max-width: 250px;">
+        <span class="input-group-text">:</span>
+        <input type="text" class="form-control request-form-headers-value" placeholder="Value">
+        <button class="btn btn-danger request-form-headers-remove" type="button">-</button>
+    </div>
+    <div class="input-group mt-3 input-group-add-remove">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0 request-form-headers-new-enabled" type="checkbox" aria-label="Enabled" checked>
+        </div>
+        <input type="text" class="form-control request-form-headers-new-name" placeholder="Header"
+               list="request-form-headers-name-options" style="max-width: 250px;">
+        <span class="input-group-text">:</span>
+        <input type="text" class="form-control request-form-headers-new-value" placeholder="Value">
+        <button class="btn btn-primary request-form-headers-new-add" type="button">+</button>
+    </div>
+    <datalist id="request-form-headers-name-options">
+        <option value="Accept">
+        <option value="Authorization">
+        <option value="Content-Type">
+        <option value="Cookie">
+        <option value="Host">
+        <option value="Origin">
+        <option value="Referer">
+        <option value="User-Agent">
+        <option value="X-HTTP-Method">
+        <option value="X-HTTP-Method-Override">
+    </datalist>
+    <div class="form-floating mt-3">
+        <textarea class="form-control request-form-payload" placeholder="Payload" style="min-height: 300px">{{ payload }}</textarea>
+        <label>Payload</label>
+    </div>
+</form>

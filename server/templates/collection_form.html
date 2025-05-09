@@ -1,0 +1,39 @@
+<div class="alert alert-primary" role="alert">
+    Select an existing folder to track as a collection
+</div>
+<form class="collection-form">
+    <div class="input-group mt-3">
+        <input type="text" class="form-control collection-form-name" placeholder="Folder"{% if collection %} readonly value="{{ collection }}"{% endif %}>
+        <button type="submit" class="btn btn-primary collection-form-save">Save</button>
+    </div>
+{% for variable in variables %}
+    <div class="input-group mt-3 input-group-add-remove collection-form-variables-row">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0 collection-form-variables-enabled" type="checkbox" aria-label="Enabled"{% if variable.enabled %} checked{% endif %}>
+        </div>
+        <input type="text" class="form-control collection-form-variables-name" placeholder="Variable"
+               style="max-width: 250px;" value="{{ variable.name }}">
+        <span class="input-group-text">=</span>
+        <input type="text" class="form-control collection-form-variables-value" placeholder="Value" value="{{ variable.value }}">
+        <button class="btn btn-danger collection-form-variables-remove" type="button">-</button>
+    </div>
+{% endfor %}
+    <div class="input-group mt-3 input-group-add-remove collection-form-variables-row collection-form-variables-row-prototype">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0 collection-form-variables-enabled" type="checkbox" aria-label="Enabled">
+        </div>
+        <input type="text" class="form-control collection-form-variables-name" placeholder="Variable" style="max-width: 250px;">
+        <span class="input-group-text">=</span>
+        <input type="text" class="form-control collection-form-variables-value" placeholder="Value">
+        <button class="btn btn-danger collection-form-variables-remove" type="button">-</button>
+    </div>
+    <div class="input-group mt-3 input-group-add-remove">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0 collection-form-variables-new-enabled" type="checkbox" aria-label="Enabled" checked>
+        </div>
+        <input type="text" class="form-control collection-form-variables-new-name" placeholder="Variable" style="max-width: 250px;">
+        <span class="input-group-text">=</span>
+        <input type="text" class="form-control collection-form-variables-new-value" placeholder="Value">
+        <button class="btn btn-primary collection-form-variables-new-add" type="button">+</button>
+    </div>
+</form>
